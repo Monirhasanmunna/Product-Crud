@@ -9,7 +9,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return view('product.index');
+        $product = ProductModel::latest()->paginate(6);
+        return view('product.index',compact('product'))->with('i',(request()->input('page',1)-1)*4);
     }
 
     public function addform()
@@ -18,13 +19,12 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-    {
-        
-       // image validation //
-       $request->validate([
-        'title' => 'required|max:255',
-        'details' => 'required',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+    { 
+    // image validation //
+    $request->validate([
+    'title' => 'required|max:255',
+    'details' => 'required',
+    'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
     ]);
 
     $imageName = '';
@@ -33,18 +33,19 @@ class ProductController extends Controller
     $request->image->move(public_path('uploads'),$imageName);
     }
 
-        
-
     // data store to database //
-
-     $data = new ProductModel;
-
-
+    $data = new ProductModel;
     $data->title = $request->title;
     $data->details = $request->details;
     $data->image =$imageName;
     $data->save();
 
     return back()->with('status','Movies has been added succesfully');
+    }
+
+
+    public function show($id)
+    {
+   
     }
 }

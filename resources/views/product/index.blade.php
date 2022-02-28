@@ -11,33 +11,30 @@
     <table class="table table-hover">
     <thead>
         <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Id</th>
+        <th scope="col">Product Title</th>
+        <th scope="col">Details</th>
+        <th scope="col">Photo</th>
         </tr>
     </thead>
+    @if($product)
     <tbody>
-        <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        @foreach($product as $data)
+        <tr class="align-middle">
+        <th></th>
+        <td>{{$data->title}}</td>
+        <td>{{$data->details}}</td>
+        <td><img style="width: 60px;" class="img-thumbnail " src="{{asset('uploads/'.$data->image)}}"></td>
         </tr>
-        <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        </tr>
-        <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        </tr>
+        @endforeach
     </tbody>
+    @endif
     </table>
-
+   <div class="d-flex">
+       <div class="m-auto">
+       {!! $product->links() !!}
+       </div>
+   </div>
     @endsection
     
 
