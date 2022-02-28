@@ -10,7 +10,7 @@
 
     <title>Product List</title>
   </head>
-  <body>
+  <body style="background-color: #E6E6E6;">
     <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">

@@ -8,23 +8,32 @@
 @section('navbtn')
 <a class="nav-link active" aria-current="page" href="{{url('add_product')}}">Add Product</a>
 @endsection
-    <table class="table table-hover">
-    <thead>
-        <tr>
+
+@if($massege=Session::get('delete'))
+    <div class="alert alert-primary text-center">{{$massege}}</div>
+    @endif
+    <table class="table table-bordered ">
+    <thead class="thead-dark">
+        <tr class="text-center">
         <th scope="col">Id</th>
         <th scope="col">Product Title</th>
-        <th scope="col">Details</th>
         <th scope="col">Photo</th>
+        <th scope="col">Details</th>
+        <th scope="col" colspan="3" >Action</th>
         </tr>
     </thead>
     @if($product)
     <tbody>
+    
         @foreach($product as $data)
         <tr class="align-middle">
-        <th></th>
-        <td>{{$data->title}}</td>
-        <td>{{$data->details}}</td>
-        <td><img style="width: 60px;" class="img-thumbnail " src="{{asset('uploads/'.$data->image)}}"></td>
+        <th class="text-center">{{++$i}}</th>
+        <td class="text-center">{{$data->title}}</td>
+        <td class="text-center"><img style="width: 70px;" class="img-thumbnail " src="{{asset('uploads/'.$data->image)}}"></td>
+        <td>{{ Str::words($data->details, 15, $end='.....') }}</td>
+        <td class="text-center"><a class="btn btn-sm btn-primary" href="{{route('show',$data->id)}}">Show</a></td>
+        <td class="text-center"><a class="btn btn-sm btn-secondary" href="{{route('edit',$data->id)}}">Edit</a></td>
+        <td class="text-center"><a class="btn btn-sm btn-warning" href="{{route('delete',$data->id)}}">Delete</a></td>
         </tr>
         @endforeach
     </tbody>

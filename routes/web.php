@@ -20,3 +20,8 @@ Route::get('/', function () {
 Route::get('index','ProductController@index')->name('index');
 Route::get('add_product','ProductController@addform');
 Route::post('store','ProductController@store')->name('store');
+Route::get('product/details/{id}', 'ProductController@show')->name('show');
+Route::get('edit/details/{id}', 'ProductController@edit')->name('edit');
+Route::post('product/update/{id}','ProductController@update')->name('update');
+Route::get('delete/details/{id}', 'ProductController@delete')->name('delete');
+
